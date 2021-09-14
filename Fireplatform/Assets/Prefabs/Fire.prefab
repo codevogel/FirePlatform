@@ -147,6 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 9156582942786942860}
-  spreadTime: 1
+  spreadTime: 0.2
   spreadDistance: 0.25
   drawGizmos: 1

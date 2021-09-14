@@ -18,10 +18,13 @@ public class Sparkle : MonoBehaviour
     [Tooltip("Draw gizmos for circlecast")]
     public bool drawGizmos;
 
+    private FireStarter fireStarter;
+
     // Start is called before the first frame update
     void Start()
     {
-        timeOfDeath = Time.time + lifetime; 
+        timeOfDeath = Time.time + lifetime;
+        fireStarter = GameObject.FindGameObjectWithTag("Firestarter").GetComponent<FireStarter>();
     }
 
     // Update is called once per frame
@@ -73,6 +76,8 @@ public class Sparkle : MonoBehaviour
             Vector2 closestPoint = hit.transform.GetComponent<PolygonCollider2D>().ClosestPoint(this.transform.position);
             // Instantiate new fire on closestpoint
             Fire newFire = Instantiate(fire, closestPoint, Quaternion.identity, this.transform.parent).GetComponent<Fire>();
+            // Let this fire know about the FireStarter that started it.
+            newFire.FireStarter = fireStarter;
             // Rotate towards hit normal
             newFire.transform.up = hit.normal;
             // Make fire bidirectional
