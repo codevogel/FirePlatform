@@ -55,6 +55,10 @@ public class Fire : MonoBehaviour
     /// </summary>
     public Fire RightLeafFire { get; private set; }
 
+    /// <summary>
+    /// The trigger for this fire
+    /// </summary>
+    public BoxCollider2D Trigger { get; set; }
 
     //TODO: Remove debug vars
     private Vector2 circleCastGizmoOrigin;
@@ -67,6 +71,7 @@ public class Fire : MonoBehaviour
     private void Start()
     {
         timeOfSpread = Time.time + spreadTime;
+        Trigger = GetComponent<BoxCollider2D>();
     }
 
     /// <summary>
