@@ -60,6 +60,8 @@ public class Sparkle : MonoBehaviour
     public void StartFire()
     {
         // Circlecast to find any close colliders
+        //GGD: i think here we should add a layermask indicating that we must collide with layers 'Ground' or 'Platform', 
+        //in that case if there is a player/enemy over it, the fire will be instantiate in the floor under them
         RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, radius, Vector2.up, 0);
         if (hit)
         {
@@ -71,6 +73,9 @@ public class Sparkle : MonoBehaviour
 
             // Find closest point between hit point and sparkle.
             Vector2 closestPoint = hit.transform.GetComponent<PolygonCollider2D>().ClosestPoint(this.transform.position);
+            //GGD: What happens if we are colliding with something else? (enemy, the player). Should we return or set the fire over them?
+            //(the layermsk in the command above should fix this)
+            
             // Instantiate new fire on closestpoint
             Fire newFire = Instantiate(fire, closestPoint, Quaternion.identity, this.transform.parent).GetComponent<Fire>();
             // Rotate towards hit normal
@@ -82,6 +87,7 @@ public class Sparkle : MonoBehaviour
 
     public void Die()
     {
+        //GGD: Very nice to destroy this once it did its work, so it doesnt take performance
         Destroy(this.gameObject);
     }
 }
