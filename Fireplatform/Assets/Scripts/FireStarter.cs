@@ -8,6 +8,7 @@ public class FireStarter : MonoBehaviour
     public GameObject sparkle;
 
     // Start is called before the first frame update
+    //GGD: Avoid empty start/update methods for performance issues, they are called anyway even if they dont contain code
     void Start()
     {
         
