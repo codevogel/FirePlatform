@@ -126,6 +126,11 @@ public class Fire : MonoBehaviour
             // Find closest position of hit collider to newPos
             Vector3 closestPosition = hit.collider.ClosestPoint(newPos);
             // Instantiate fire at closest point
+            // GGD: This will instantiate a lot of fire objects, and instantiate is not good for performance.
+            //For now we will leave it like this, but when we integrate this in reggie project, we will use an object
+            //pool instead (we already have a class), i.e. an object which reuses the fires which are not in the screen anymore
+            //to avoid instantiate so many. You can have a read here: https://docs.google.com/document/d/12Hl_VjBzEIMQ2udz6iJOmjmiuLxPyUCvqHoYcEVPuhs/edit
+
             Fire newFire = Instantiate(firePrefab, closestPosition, Quaternion.identity, this.transform.parent).GetComponent<Fire>();
             // Rotate in direction of hit normal
             newFire.transform.up = hit.normal;
@@ -133,4 +138,6 @@ public class Fire : MonoBehaviour
             newFire.Direction = newDir;
         }
     }
+    //GGD: Discuss with frank if the fire burns forever, or it has a limited time. 
+    //What happens when we passed it and we dont see it anymore? should it be destroyed for performance improvement?
 }
