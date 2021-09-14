@@ -23,7 +23,7 @@ public class FireStarter : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            StartSparkle(mouseWorldPos)
+            StartSparkle(mouseWorldPos);
         }
     }
 

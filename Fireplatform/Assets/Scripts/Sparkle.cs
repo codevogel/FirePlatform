@@ -63,7 +63,7 @@ public class Sparkle : MonoBehaviour
     public void StartFire()
     {
         // Circlecast to find any close colliders
-        RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, radius, Vector2.up, 0);
+        RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, radius, Vector2.up, 0, LayerMask.GetMask("Ground"));
         if (hit)
         {
             //TODO: Remove debug ray

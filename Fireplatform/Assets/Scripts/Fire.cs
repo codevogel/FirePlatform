@@ -199,7 +199,7 @@ public class Fire : MonoBehaviour
         Vector3 raycastVector = this.transform.up * rayCastMagnitude;
 
         // Cast from 'above' potential location to prevent getting stuck in collider.
-        RaycastHit2D hit = Physics2D.Raycast(potentialLocation + raycastVector, -this.transform.up);
+        RaycastHit2D hit = Physics2D.Raycast(potentialLocation + raycastVector, -this.transform.up, 1000f, LayerMask.GetMask("Ground"));
         if (hit)
         {
             //TODO: Remove debug tool
@@ -221,7 +221,7 @@ public class Fire : MonoBehaviour
         else
         {
             // If nothing was found, try circlecasting at original potential location, as platform may have had a <90 degree corner.
-            hit = Physics2D.CircleCast(potentialLocation, 5, Vector2.up, 0);
+            hit = Physics2D.CircleCast(potentialLocation, 5, Vector2.up, 0, LayerMask.GetMask("Ground"));
             // TODO: remove debug tool
             if (drawGizmos)
             {
