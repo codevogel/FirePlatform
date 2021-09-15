@@ -138,6 +138,14 @@ public class Fire : MonoBehaviour
         }
     }
 
+    void OnBecameInvisible()
+    {
+        if (ParentFire == null && this.transform.position.x < Camera.main.transform.position.x)
+        {
+            this.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Spread the fire in Direction
     /// </summary>
@@ -214,6 +222,7 @@ public class Fire : MonoBehaviour
             }
             // Find closest position of hit collider to newPos
              Vector3 closestPosition = hit.collider.ClosestPoint(potentialLocation);
+
             // Instantiate fire at closest point
             Fire newFire = Instantiate(firePrefab, closestPosition, Quaternion.identity, this.transform.parent).GetComponent<Fire>();
             newFire.FireStarter = FireStarter;
@@ -236,8 +245,10 @@ public class Fire : MonoBehaviour
             if (hit)
             {
                 Vector3 closestPosition = hit.transform.GetComponent<PolygonCollider2D>().ClosestPoint(this.transform.position);
+
                 // Instantiate fire at closest point
                 Fire newFire = Instantiate(firePrefab, closestPosition, Quaternion.identity, this.transform.parent).GetComponent<Fire>();
+                newFire.FireStarter = FireStarter;
                 // Rotate in direction of hit normal
                 newFire.transform.up = hit.normal;
                 // Set new fire's spreading direction

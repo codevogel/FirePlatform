@@ -74,14 +74,16 @@ public class Sparkle : MonoBehaviour
 
             // Find closest point between hit point and sparkle.
             Vector2 closestPoint = hit.transform.GetComponent<PolygonCollider2D>().ClosestPoint(this.transform.position);
+
+            GameObject fireHolder = Instantiate(new GameObject("Fireholder"), closestPoint, Quaternion.identity, this.transform.parent);
             // Instantiate new fire on closestpoint
-            Fire newFire = Instantiate(fire, closestPoint, Quaternion.identity, this.transform.parent).GetComponent<Fire>();
+            Fire parentFire = Instantiate(fire, closestPoint, Quaternion.identity, fireHolder.transform).GetComponent<Fire>();
             // Let this fire know about the FireStarter that started it.
-            newFire.FireStarter = fireStarter;
+            parentFire.FireStarter = fireStarter;
             // Rotate towards hit normal
-            newFire.transform.up = hit.normal;
+            parentFire.transform.up = hit.normal;
             // Make fire bidirectional
-            newFire.Direction = FireDirection.BOTH;
+            parentFire.Direction = FireDirection.BOTH;
         }
     }
 

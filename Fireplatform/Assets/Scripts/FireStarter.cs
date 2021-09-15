@@ -55,6 +55,7 @@ public class FireStarter : MonoBehaviour
                     // If they do, platform is engulved in fire, stop spreading.
                     parentFire.LeftLeafFire.MarkSpread();
                     parentFire.RightLeafFire.MarkSpread();
+
                     // Add this parentfire to be removed from the list
                     toBeRemoved.Add(parentFire);
                 }
