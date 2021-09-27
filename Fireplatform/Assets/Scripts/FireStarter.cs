@@ -9,10 +9,16 @@ public class FireStarter : MonoBehaviour
 
     private List<Fire> activeFires;
 
+    private Fire parentFire;
+
+    private static GameObjectPooler gameObjectPooler;
+
     // Start is called before the first frame update
     void Start()
     {
         activeFires = new List<Fire>();
+        gameObjectPooler = GameObjectPoolerHandler.ins;
+        gameObjectPooler.AddAndDisable(Instantiate(sparkle));
     }
 
     // Update is called once per frame

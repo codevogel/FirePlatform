@@ -13,6 +13,9 @@ public class Sparkle : MonoBehaviour
     [Tooltip("The radius in which this spark can set a fire")]
     public float radius;
 
+    /// <summary>
+    /// Time where sparkle dies and fire starts
+    /// </summary>
     private float timeOfDeath;
 
     [Tooltip("Draw gizmos for circlecast")]
@@ -24,7 +27,7 @@ public class Sparkle : MonoBehaviour
     void Start()
     {
         timeOfDeath = Time.time + lifetime;
-        fireStarter = GameObject.FindGameObjectWithTag("Firestarter").GetComponent<FireStarter>();
+        fireStarter = GetComponentInParent<FireStarter>();
     }
 
     // Update is called once per frame
